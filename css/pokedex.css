@@ -1,0 +1,29 @@
+.pokedex {
+    /* Lo dividimos entre 16, para obtener el rem, la altura de acuerdo a figma es de 608px  */
+    /* 608 / 16 = 38 */
+    /* Height */
+    block-size: 38rem;
+    /* Width */
+    max-inline-size: 24rem;
+    inline-size: 100%;
+    /* En el index.html, colocamos tab-index=0 , para poder usar la tecla tab y se moveria,se sombrearia , pero
+    usaremos outline, para que no se resalte*/
+    outline: none;
+}
+
+.pokedex-main {
+    /* Colocamos para que herenden el ancho y largo del padre */
+    inline-size: inherit;
+    block-size: inherit;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    /* 16px = 1rem */
+    gap: 1rem;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    /* De acuerdo a figma, los bordes son de 8px, que vendria ser medio rem */
+    border-radius: .5rem .5rem 0 .5rem;
+    /* Para el desborde */
+    overflow: hidden;
+}
