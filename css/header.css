@@ -21,6 +21,6 @@
     margin-inline-end: .5rem;
 }
 
-.header .light .is-big {
+.header .light.is-big {
     margin-inline-end: 1rem;
 }
