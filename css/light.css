@@ -5,7 +5,7 @@
     overflow: hidden;
 }
 
-.light-screen {
+.screen-light {
     display: flex;
     flex-direction: row;
     gap: 106px;
