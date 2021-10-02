@@ -1,8 +1,8 @@
-.screen {}
+/* .screen {} */
 
 .screen-border {
     padding: 1rem;
-    padding-block-end: 2.75rem;
+    /* padding-block-end: 2.75rem; */
     border-radius: .5rem;
     background-color: var(--white);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 2rem 100%, 0 calc(100% - 2.75rem));
