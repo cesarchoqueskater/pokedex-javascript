@@ -22,15 +22,25 @@ function loader(isLoading = false) {
 
 export async function findPokemon(id) {
 
-    const pokemon = await getPokemon(id)
-    const species = await getSpecies(id)
+    const { data: pokemon, isError } = await getPokemon(id)
 
-    //Buscamos en la api  Species, la descripcion del pokemon a buscar,en esta parte es un array de Objetos donde estan separados por language, buscamos el que sea español "es"
-    const description = species.flavor_text_entries.find((flavor) => flavor.language.name === 'es')
-    return {
-        sprites: pokemon.sprites.front_default,
-        description: description.flavor_text
+    if (!isError) {
+        const species = await getSpecies(id)
+
+        //Buscamos en la api  Species, la descripcion del pokemon a buscar,en esta parte es un array de Objetos donde estan separados por language, buscamos el que sea español "es"
+        const description = species.flavor_text_entries.find((flavor) => flavor.language.name === 'es')
+        return {
+            sprites: pokemon.sprites.front_default,
+            description: description.flavor_text,
+            id: pokemon.id
+        }
     }
+    return {
+        sprites: '',
+        description: 'Pokémon no fue encontrado, por favor vuelve a intentar',
+        id: ''
+    }
+
 }
 
 export async function setPokemon(id) {
@@ -43,4 +53,5 @@ export async function setPokemon(id) {
     loader(false)
     setImage(pokemon.sprites)
     setDescription(pokemon.description)
+    return pokemon
 }
