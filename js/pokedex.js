@@ -13,6 +13,13 @@ function setDescription(text) {
     $description.textContent = text
 }
 
+const $screen = document.querySelector('#screen')
+
+function loader(isLoading = false) {
+    const img = isLoading ? 'url(./images/loading.gif)' : ''
+    $screen.style.backgroundImage = img
+}
+
 export async function findPokemon(id) {
 
     const pokemon = await getPokemon(id)
@@ -27,7 +34,13 @@ export async function findPokemon(id) {
 }
 
 export async function setPokemon(id) {
+    // Prender loader
+    loader(true)
+
     const pokemon = await findPokemon(id)
+
+    // Apagar loader
+    loader(false)
     setImage(pokemon.sprites)
     setDescription(pokemon.description)
 }

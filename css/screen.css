@@ -19,4 +19,5 @@
     box-sizing: border-box;
     /* Por que eventualmente colocaremos imagenes, y queremos que ocupe todo el area */
     background-size: cover;
+    background-position: center;
 }
