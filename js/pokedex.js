@@ -1,5 +1,11 @@
 import { getPokemon, getSpecies } from "./api.js"
 
+const $id = document.querySelector('#id')
+
+function setId(id) {
+    $id.value = id
+}
+
 const $image = document.querySelector('#image')
 
 function setImage(image) {
@@ -36,7 +42,7 @@ export async function findPokemon(id) {
         }
     }
     return {
-        sprites: '',
+        sprites: './images/404.png',
         description: 'Pokémon no fue encontrado, por favor vuelve a intentar',
         id: ''
     }
@@ -51,6 +57,7 @@ export async function setPokemon(id) {
 
     // Apagar loader
     loader(false)
+    setId(pokemon.id)
     setImage(pokemon.sprites)
     setDescription(pokemon.description)
     return pokemon

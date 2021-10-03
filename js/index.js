@@ -4,10 +4,12 @@ const $form = document.querySelector('#form')
 const $next = document.querySelector('#next-pokemon')
 const $prev = document.querySelector('#prev-pokemon')
 const $pokedex = document.querySelector('#pokedex')
+const $idRandomButton = document.querySelector('#idRandomButton')
 
 $form.addEventListener('submit', handleSumbit)
 $next.addEventListener('click', handleNextPokemon)
 $prev.addEventListener('click', handlePrevPokemon)
+$idRandomButton.addEventListener('click', handleRandomPokemon)
 
 let activePokemon = null
 async function handleSumbit(event) {
@@ -28,4 +30,11 @@ async function handleNextPokemon() {
 async function handlePrevPokemon() {
     const id = (activePokemon === null || activePokemon.id === 1) ? 893 : activePokemon.id - 1
     activePokemon = await setPokemon(id)
+}
+
+async function handleRandomPokemon() {
+    const valueMax = 893
+    const valueMin = 1
+    const valueRandom = Math.floor(Math.random() * (valueMax - valueMin + 1) + valueMin);
+    activePokemon = await setPokemon(valueRandom)
 }

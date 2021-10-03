@@ -16,6 +16,12 @@
     background-color: var(--secondary);
     border-radius: 50%;
     filter: drop-shadow(2px 2px 0 var(--black));
+    cursor: pointer;
+    border: 1px solid var(--secondary);
+}
+
+.button-variants:active {
+    transform: scale(.9);
 }
 
 .is-veryBig {
