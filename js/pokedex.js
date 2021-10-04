@@ -1,5 +1,6 @@
 import { getPokemon, getSpecies } from "./api.js"
 import { createChart } from "./chart.js"
+import { formatCharacteristic } from "./utils/format-data.js"
 
 const $id = document.querySelector('#id')
 
@@ -43,6 +44,17 @@ function speech(text) {
     })
 }
 
+const $weight = document.querySelector('#weight')
+
+function setWeight(weight) {
+    $weight.textContent = `PESO: ${weight} Kg`
+}
+
+const $height = document.querySelector('#height')
+
+function setHeight(height) {
+    $height.textContent = `ALTURA: ${height} M`
+}
 export async function findPokemon(id) {
 
     const { data: pokemon, isError } = await getPokemon(id)
@@ -64,13 +76,17 @@ export async function findPokemon(id) {
                 sprites.push(pokemon.sprites[item])
             }
         }
-        // console.log(sprites)
+        const weight = formatCharacteristic(pokemon.weight)
+        const height = formatCharacteristic(pokemon.height)
+            // console.log(sprites)
         return {
             sprites,
             description: description.flavor_text,
             id: pokemon.id,
             name: pokemon.name,
-            stats
+            stats,
+            weight,
+            height
         }
     }
     return {
@@ -86,8 +102,8 @@ export async function setPokemon(id) {
     loader(true)
 
     const pokemon = await findPokemon(id)
-
-    // Apagar loader
+        // debugger
+        // Apagar loader
     loader(false)
     setId(pokemon.id)
     setImage(pokemon.sprites[0])
@@ -97,5 +113,8 @@ export async function setPokemon(id) {
         activeChart.destroy()
     }
     activeChart = createChart(pokemon)
+    setWeight(pokemon.weight)
+
+    setHeight(pokemon.height)
     return pokemon
 }

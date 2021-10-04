@@ -9,6 +9,7 @@
 @import './search.css';
 @import './description.css';
 @import './navigation.css';
+@import './characteristic.css';
 :root {
     --white: #fffffe;
     --black: #300f16;

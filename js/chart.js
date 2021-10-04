@@ -25,7 +25,7 @@ export function createChart(pokemon) {
             plugins: {
                 title: {
                     display: true,
-                    text: pokemon.name,
+                    text: (pokemon.name).toUpperCase(),
                     color: 'white'
                 },
                 legend: {
