@@ -35,8 +35,17 @@ export async function findPokemon(id) {
 
         //Buscamos en la api  Species, la descripcion del pokemon a buscar,en esta parte es un array de Objetos donde estan separados por language, buscamos el que sea español "es"
         const description = species.flavor_text_entries.find((flavor) => flavor.language.name === 'es')
+        const sprites = [pokemon.sprites.front_default]
+            // Iteramos todos los nombre del objeto que se tiene en sprites
+        for (const item in pokemon.sprites) {
+            console.log(item)
+            if (item !== 'front_default' && item !== 'other' && item !== 'versions' && pokemon.sprites[item]) {
+                sprites.push(pokemon.sprites[item])
+            }
+        }
+        console.log(sprites)
         return {
-            sprites: pokemon.sprites.front_default,
+            sprites,
             description: description.flavor_text,
             id: pokemon.id
         }
@@ -58,7 +67,7 @@ export async function setPokemon(id) {
     // Apagar loader
     loader(false)
     setId(pokemon.id)
-    setImage(pokemon.sprites)
+    setImage(pokemon.sprites[0])
     setDescription(pokemon.description)
     return pokemon
 }
