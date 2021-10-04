@@ -1,3 +1,4 @@
+import './chart.js'
 import { setPokemon, setImage } from "./pokedex.js"
 
 const $form = document.querySelector('#form')

@@ -1,4 +1,5 @@
 import { getPokemon, getSpecies } from "./api.js"
+import { createChart } from "./chart.js"
 
 const $id = document.querySelector('#id')
 
@@ -54,6 +55,8 @@ export async function findPokemon(id) {
 
         // Colocamos el default, por defecto
         const sprites = [pokemon.sprites.front_default]
+
+        const stats = pokemon.stats.map(item => item.base_stat)
             // Iteramos todos los nombre del objeto que se tiene en sprites
         for (const item in pokemon.sprites) {
             // console.log(item)
@@ -66,7 +69,8 @@ export async function findPokemon(id) {
             sprites,
             description: description.flavor_text,
             id: pokemon.id,
-            name: pokemon.name
+            name: pokemon.name,
+            stats
         }
     }
     return {
@@ -76,7 +80,7 @@ export async function findPokemon(id) {
     }
 
 }
-
+let activeChart = null
 export async function setPokemon(id) {
     // Prender loader
     loader(true)
@@ -89,5 +93,9 @@ export async function setPokemon(id) {
     setImage(pokemon.sprites[0])
     setDescription(pokemon.description)
     speech(`${pokemon.name}. ${pokemon.description}`)
+    if (activeChart instanceof Chart) {
+        activeChart.destroy()
+    }
+    activeChart = createChart(pokemon)
     return pokemon
 }
