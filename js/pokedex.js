@@ -8,7 +8,7 @@ function setId(id) {
 
 const $image = document.querySelector('#image')
 
-function setImage(image) {
+export function setImage(image) {
     // Seteamos la imagen, de la ruta del APi, donde esta la imagen, igual hacemos para la descripcion
     $image.src = image
 }
@@ -35,10 +35,12 @@ export async function findPokemon(id) {
 
         //Buscamos en la api  Species, la descripcion del pokemon a buscar,en esta parte es un array de Objetos donde estan separados por language, buscamos el que sea español "es"
         const description = species.flavor_text_entries.find((flavor) => flavor.language.name === 'es')
+
+        // Colocamos el default, por defecto
         const sprites = [pokemon.sprites.front_default]
             // Iteramos todos los nombre del objeto que se tiene en sprites
         for (const item in pokemon.sprites) {
-            console.log(item)
+            // console.log(item)
             if (item !== 'front_default' && item !== 'other' && item !== 'versions' && pokemon.sprites[item]) {
                 sprites.push(pokemon.sprites[item])
             }
