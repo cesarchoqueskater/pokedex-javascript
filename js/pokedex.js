@@ -26,6 +26,22 @@ function loader(isLoading = false) {
     $screen.style.backgroundImage = img
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
+const $light = document.querySelector('#light')
+
+function speech(text) {
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.lang = 'es'
+    speechSynthesis.speak(utterance)
+    $light.classList.add('is-animated')
+
+    // Para cuando termine de hablar, desactivemos la animacion
+    utterance.addEventListener('end', () => {
+        $light.classList.remove('is-animated')
+
+    })
+}
+
 export async function findPokemon(id) {
 
     const { data: pokemon, isError } = await getPokemon(id)
@@ -45,11 +61,12 @@ export async function findPokemon(id) {
                 sprites.push(pokemon.sprites[item])
             }
         }
-        console.log(sprites)
+        // console.log(sprites)
         return {
             sprites,
             description: description.flavor_text,
-            id: pokemon.id
+            id: pokemon.id,
+            name: pokemon.name
         }
     }
     return {
@@ -71,5 +88,6 @@ export async function setPokemon(id) {
     setId(pokemon.id)
     setImage(pokemon.sprites[0])
     setDescription(pokemon.description)
+    speech(`${pokemon.name}. ${pokemon.description}`)
     return pokemon
 }
